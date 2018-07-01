@@ -43,6 +43,11 @@ exports.postCheckout = (req, res) => {
   //Generate order code
   var lastedOrderCode = '10001';
 
+  console.log({
+    customerName: req.body.name,
+    customerPhone: req.body.phone, 
+    detail: req.body.cart, 
+  });
   //Get lastest order
   Order.findOne({}, {}, { sort: { 'createdAt' : -1 } }, function(err, lastestOrder) {
     if(lastestOrder){
@@ -61,7 +66,7 @@ exports.postCheckout = (req, res) => {
       orderCode : newOrderCode,
       customerName: req.body.name,
       customerPhone: req.body.phone, 
-      detail: req.body.cart,
+      detail: cart,
       total: total,
       status: 0
     });
