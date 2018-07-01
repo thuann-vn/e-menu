@@ -10,10 +10,11 @@
       ul.nav.navbar-nav
         li.nav-item(class=(title === 'Home') ? 'active' : undefined)
           a.nav-link(href='/') Home
-        li.nav-item(class=(title === 'E-Menu') ? 'active' : undefined)
-          a.nav-link(href='/e-menu') E-Menu
-        li.nav-item(class=(title === 'Orders') ? 'active' : undefined)
-          a.nav-link(href='/orders') Orders
+        if user
+          li.nav-item(class=(title === 'E-Menu') ? 'active' : undefined)
+            a.nav-link(href='/e-menu') E-Menu
+          li.nav-item(class=(title === 'Orders') ? 'active' : undefined)
+            a.nav-link(href='/order') Orders
       ul.nav.navbar-nav.ml-auto
         if !user
           li.nav-item(class=(title === 'Login') ? 'active' : undefined)
@@ -28,8 +29,5 @@
               span= user.profile.name || user.email || user.id
               i.caret
             ul.dropdown-menu
-              li.dropdown-item
-                a(href='/account') My Account
-              li.divider.dropdown-item
               li.dropdown-item
                 a(href='/logout') Logout

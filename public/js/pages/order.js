@@ -4,7 +4,7 @@ $(document).ready(() => {
     var item = $(this).data('item');
     Swal({
       title: 'Are you sure?',
-      text: 'You will not be able to recover this menu item!',
+      text: 'You will not be able to recover this order!',
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',

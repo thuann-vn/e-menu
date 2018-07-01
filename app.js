@@ -33,8 +33,8 @@ dotenv.load({ path: '.env' });
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
-const contactController = require('./controllers/contact');
 const menuController = require('./controllers/menu');
+const orderController = require('./controllers/order');
 
 /**
  * API keys and Passport configuration.
@@ -142,6 +142,13 @@ app.get('/e-menu', menuController.index);
 app.get('/e-menu/edit/:id', menuController.getEdit);
 app.post('/e-menu/delete', menuController.postDelete);
 app.post('/e-menu/createorupdate', upload.single('image'), menuController.postCreateOrUpdate);
+
+/**
+ * Order manager routes.
+ */
+app.get('/order', orderController.index);
+app.get('/order/edit/:id', orderController.getEdit);
+app.post('/order/delete', orderController.postDelete);
 
 /**
  * API for ReactNative app.

@@ -46,7 +46,7 @@ block content
               td
                 image.img-thumbnail(src=item.image, width="56", alt=item.name)
               td=item.name
-              td=item.price
+              td=item.price.toLocaleString()
               td
                 .btn-group.btn-group-sm
                   a.btn.btn-primary(href="/e-menu/edit/"+item.id)

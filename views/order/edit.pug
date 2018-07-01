@@ -4,33 +4,45 @@ block after_script
   script(src='/js/pages/menu.js')
 
 block content
-  h1 MENU UPDATE
-  p.lead=item.name
+  h1 ORDER DETAILS
+  p.lead Order
+    span=' ' + order.orderCode
   hr
   .row
-    .col-md-4.col-offset-md-4
+    .col-md-4
       .well
-        form#menuForm(method="POST" action="/e-menu/createorupdate" enctype='multipart/form-data' novalidate="novalidate")
-            input(type='hidden', name='id', value=item.id)
-            .form-group
-                label.control-label(for="name") Food or Drink name
-                input#name.form-control(name="name" type="text" value=item.name required="true" placeholder="Orange Juice..." autofocus=true)
-                span.help-block            
-            .form-group
-                label.control-label(for="price") Price
-                input#price.form-control(name="price" type="number" value=item.price required="true")
-                span.help-block    
-            .form-group
-                label.control-label(for="display_order") Display order
-                input#display_order.form-control(name="display_order" value=item.displayOrder type="number" required="true")
-                span.help-block            
-            .form-group
-                label.control-label(for="image") Image
-                <br/>
-                image.img-thumbnail(src=item.image, width="156", alt=item.name)
-                <br/>
-                <br/>
-                input#image.form-control(name="image" type="file" required="true" accept="image/*" placeholder="Update image")
-                span.help-block
-            button.btn.btn-success.btn-block(type="submit") Save changes
+        p
+            label Customer Name:
+                b=order.customerName
+        p
+            label Customer Phone Number:
+                b=order.customerPhone
+        p
+            label Total:
+                b=order.total.toLocaleString()
+        p
+            label Order date:
+                b=order.createdAt.toLocaleString()
+    .col-md-8
+      form#menuDeleteForm(method="POST" action="/e-menu/delete")
+          input(type='hidden', name='_csrf', value=_csrf)
+          input(type='hidden', name='id', value=0)
+      table.table.table-strip
+        thead
+          th 
+          th Name
+          th Price
+          th Quantity
+          th Total
+        tbody
+          each item in order.detail
+            tr
+              td
+                image.img-thumbnail(src=item.image, width="56", alt=item.name)
+              td=item.name
+              td=item.price
+              td=item.quantity.toLocaleString()
+              td=(item.price*item.quantity).toLocaleString()
+                
+
                 
