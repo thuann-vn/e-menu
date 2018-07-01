@@ -87,7 +87,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  if (req.path === '/api/upload' || req.path === '/e-menu/createorupdate') {
+  if (req.path === '/e-menu/createorupdate' || req.path === '/api/checkout') {
     next();
   } else {
     lusca.csrf()(req, res, next);
@@ -149,6 +149,7 @@ app.post('/e-menu/createorupdate', upload.single('image'), menuController.postCr
 app.get('/api', apiController.getApi);
 
 app.get('/api/get-menu', apiController.getMenu);
+app.post('/api/checkout', apiController.postCheckout);
 
 /**
  * Error Handler.
